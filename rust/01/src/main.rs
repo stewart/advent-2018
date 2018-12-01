@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 const INPUT: &'static str = include_str!("../data");
 
@@ -8,46 +8,30 @@ fn main() {
 }
 
 fn part1() {
-    let mut current_frequency: isize = 0;
+    let result: isize = INPUT
+        .lines()
+        .map(|line| line.parse::<isize>().unwrap())
+        .sum();
 
-    for (op, num) in INPUT.lines().map(|line| line.split_at(1)) {
-        let modulation: isize = num.parse().expect("Unable to parse number");
-
-        let new_frequency = match op {
-            "+" => { current_frequency + modulation },
-            "-" => { current_frequency - modulation },
-            _ => { unreachable!() }
-        };
-
-        current_frequency = new_frequency;
-    }
-
-    println!("Part 1: {}", current_frequency);
+    println!("Part 1: {}", result);
 }
 
 fn part2() {
     let mut current_frequency: isize = 0;
-    let mut frequencies_seen = HashMap::new();
+    let mut frequencies_seen = HashSet::new();
 
-    frequencies_seen.insert(0, 1);
+    frequencies_seen.insert(0);
 
-    for (op, num) in INPUT.lines().map(|line| line.split_at(1)).cycle() {
-        let modulation: isize = num.parse().expect("Unable to parse number");
+    for modulation in INPUT.lines().cycle() {
+        let modulation: isize = modulation.parse().expect("NaN");
+        current_frequency += modulation;
 
-        let new_frequency = match op {
-            "+" => { current_frequency + modulation },
-            "-" => { current_frequency - modulation },
-            _ => { unreachable!() }
-        };
+        let was_not_set = frequencies_seen.insert(current_frequency);
 
-        let entry = frequencies_seen.entry(new_frequency).or_insert(0);
-        *entry += 1;
-
-        if *entry == 2 {
-            println!("Part 2: {}", new_frequency);
+        if was_not_set == false {
             break;
         }
-
-        current_frequency = new_frequency;
     }
+
+    println!("Part 2: {}", current_frequency);
 }
