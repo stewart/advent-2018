@@ -40,16 +40,20 @@ fn part1(input: Input) -> usize {
 }
 
 fn part2(input: Input) -> Option<String> {
-    let codes: Vec<&str> = input
-        .lines()
-        .collect();
+    let codes: Vec<&str> = input.lines().collect();
 
     for a in &codes {
         for b in &codes {
-            let count = a.chars().zip(b.chars()).filter(|(x, y)| { x != y}).count();
+            let count = a.chars().zip(b.chars()).filter(|(x, y)| x != y).count();
 
             if count == 1 {
-                return Some(a.chars().zip(b.chars()).filter(|(x, y)| x == y).map(|(x, y)| x).collect());
+                return Some(
+                    a.chars()
+                        .zip(b.chars())
+                        .filter(|(x, y)| x == y)
+                        .map(|(x, y)| x)
+                        .collect(),
+                );
             }
         }
     }
