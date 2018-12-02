@@ -8,7 +8,7 @@ type Input = &'static str;
 
 fn main() {
     println!("Part 01: {}", part1(DATA));
-    println!("Part 02: {}", part2(DATA));
+    println!("Part 02: {}", part2(DATA).unwrap());
 }
 
 fn part1(input: Input) -> usize {
@@ -39,6 +39,20 @@ fn part1(input: Input) -> usize {
     number_of_values_with_two * number_of_values_with_three
 }
 
-fn part2(input: Input) -> isize {
-    0
+fn part2(input: Input) -> Option<String> {
+    let codes: Vec<&str> = input
+        .lines()
+        .collect();
+
+    for a in &codes {
+        for b in &codes {
+            let count = a.chars().zip(b.chars()).filter(|(x, y)| { x != y}).count();
+
+            if count == 1 {
+                return Some(a.chars().zip(b.chars()).filter(|(x, y)| x == y).map(|(x, y)| x).collect());
+            }
+        }
+    }
+
+    None
 }
