@@ -36,7 +36,7 @@ fn main() {
         .collect();
 
     println!("Part 01: {}", part1(claims.clone()));
-    // println!("Part 02: {}", part2(DATA));
+    println!("Part 02: {}", part2(claims.clone()));
 }
 
 fn part1(claims: Vec<Claim>) -> usize {
@@ -44,8 +44,8 @@ fn part1(claims: Vec<Claim>) -> usize {
     let mut repeats = HashSet::new();
 
     for claim in claims {
-        for x in (claim.left..(claim.left + claim.width)) {
-            for y in (claim.right..(claim.right + claim.height)) {
+        for x in claim.left..(claim.left + claim.width) {
+            for y in claim.right..(claim.right + claim.height) {
                 if !squares.insert((x, y)) {
                     repeats.insert((x, y));
                 }
@@ -56,6 +56,22 @@ fn part1(claims: Vec<Claim>) -> usize {
     repeats.len()
 }
 
-fn part2(input: Input) -> isize {
-    0
+fn part2(claims: Input) -> usize {
+    let mut squares = HashMap::new();
+    let mut not_conflicting: HashSet<usize> = claims.iter().map(|claim| claim.id).collect();
+
+    for claim in claims {
+        for x in claim.left..(claim.left + claim.width) {
+            for y in claim.right..(claim.right + claim.height) {
+                let entry = squares.entry((x, y)).or_insert(claim.id);
+
+                if *entry != claim.id {
+                    not_conflicting.remove(&claim.id);
+                    not_conflicting.remove(entry);
+                }
+            }
+        }
+    }
+
+    *not_conflicting.iter().next().unwrap()
 }
