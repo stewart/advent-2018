@@ -2,7 +2,7 @@
 
 use std::collections::{HashMap,HashSet};
 
-const DATA: &'static str = include_str!("../../../data/XX");
+const DATA: &'static str = include_str!("../../../data/04");
 
 type Input = &'static str;
 
