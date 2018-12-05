@@ -13,8 +13,18 @@ defmodule Day5 do
     |> Enum.count
   end
 
+  # What is the length of the shortest polymer you can produce by removing all
+  # units of exactly one type and fully reacting the result?
   def part2(input) do
-    0
+    chars = for ch <- ?a..?z, do: <<ch>>
+
+    chars
+    |> Enum.map(fn char ->
+      input
+      |> Enum.reject(fn i -> String.downcase(i) == char end)
+      |> part1()
+    end)
+    |> Enum.min
   end
 
   def read_input do
@@ -23,12 +33,12 @@ defmodule Day5 do
     |> String.graphemes()
   end
 
-  defp react(current, [prev | rest] = acc) do
+  def react(current, [prev | rest] = acc) do
     if current != prev && String.downcase(current) == String.downcase(prev) do
       rest
     else
       [current | acc]
     end
   end
-  defp react(current, []), do: [current]
+  def react(current, []), do: [current]
 end
