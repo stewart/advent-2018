@@ -7,8 +7,9 @@ const DATA: &'static str = include_str!("../../../data/04");
 type Input = &'static str;
 
 fn main() {
-    println!("Part 01: {}", part1(DATA));
-    println!("Part 02: {}", part2(DATA));
+    // println!("Part 01: {}", part1(DATA));
+    // println!("Part 02: {}", part2(DATA));
+    println!("Not now. Maybe later.")
 }
 
 fn part1(input: Input) -> usize {
