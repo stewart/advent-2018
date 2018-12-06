@@ -12,7 +12,7 @@ fn main() {
         .collect();
 
     println!("Part 01: {}", part1(&points));
-    // println!("Part 02: {}", part2(DATA));
+    println!("Part 02: {}", part2(&points));
 }
 
 fn part1(points: &Vec<(isize, isize)>) -> usize {
@@ -21,15 +21,12 @@ fn part1(points: &Vec<(isize, isize)>) -> usize {
         acc
     });
 
-    let min_x = *points.iter().map(|(x, _)| x).min().unwrap();
-    let max_x = *points.iter().map(|(x, _)| x).max().unwrap();
-    let min_y = *points.iter().map(|(_, y)| y).min().unwrap();
-    let max_y = *points.iter().map(|(_, y)| y).max().unwrap();
+    let ((min_x, max_x), (min_y, max_y)) = bounds(&points, 2);
 
     let mut infinites = HashSet::<(isize, isize)>::new();
 
-    for x in (min_x - 2)..=(max_x + 2) {
-        for y in (min_x - 2)..=(max_y + 2) {
+    for x in min_x..=max_x {
+        for y in min_x..=max_y {
             let mut min_distance = 10_000;
             let mut closest = None;
 
@@ -47,7 +44,7 @@ fn part1(points: &Vec<(isize, isize)>) -> usize {
             if let Some(coords) = closest {
                 *areas.entry(coords).or_insert(0) += 1;
 
-                if x == min_x - 2 || x == max_x + 2 || y == min_y - 2 || y == max_x + 2 {
+                if x == min_x || x == max_x || y == min_y || y == max_x {
                     infinites.insert(coords);
                 }
             }
@@ -62,6 +59,33 @@ fn part1(points: &Vec<(isize, isize)>) -> usize {
     *max.unwrap().1
 }
 
-fn part2(input: &str) -> usize {
-    0
+fn part2(input: &Vec<(isize, isize)>) -> usize {
+    let ((min_x, max_x), (min_y, max_y)) = bounds(input, 2);
+
+    let limit = 10_000;
+    let mut count = 0;
+
+    for x in min_x..=max_x {
+        for y in min_y..=max_y {
+            let total_distance: isize = input
+                .iter()
+                .map(|(a, b)| (a - x).abs() + (b - y).abs())
+                .sum();
+
+            if total_distance < limit {
+                count += 1;
+            }
+        }
+    }
+
+    count
+}
+
+fn bounds(points: &Vec<(isize, isize)>, margin: isize) -> ((isize, isize), (isize, isize)) {
+    let min_x = *points.iter().map(|(x, _)| x).min().unwrap();
+    let max_x = *points.iter().map(|(x, _)| x).max().unwrap();
+    let min_y = *points.iter().map(|(_, y)| y).min().unwrap();
+    let max_y = *points.iter().map(|(_, y)| y).max().unwrap();
+
+    ((min_x - margin, max_x + margin), (min_y - margin, max_y + margin))
 }
