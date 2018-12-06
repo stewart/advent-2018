@@ -29,6 +29,3 @@ defmodule Day1 do
     |> Enum.map(&String.to_integer/1)
   end
 end
-
-IO.puts "Part 1 #{Day1.part1}"
-IO.puts "Part 2 #{Day1.part2}"

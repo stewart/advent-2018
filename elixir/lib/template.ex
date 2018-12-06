@@ -20,5 +20,3 @@ defmodule DayXX do
     |> String.split("\n")
   end
 end
-
-DayXX.run

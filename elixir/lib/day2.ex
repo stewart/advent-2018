@@ -48,5 +48,3 @@ defmodule Day2 do
     {:break, result} -> result
   end
 end
-
-Day2.run

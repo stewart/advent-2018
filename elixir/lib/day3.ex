@@ -66,5 +66,3 @@ defmodule Day3 do
     end)
   end
 end
-
-Day3.run
