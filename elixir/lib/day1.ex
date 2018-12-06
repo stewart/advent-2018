@@ -23,7 +23,7 @@ defmodule Day1 do
   end
 
   def input do
-    File.read!("#{__DIR__}/../data/01")
+    File.read!("#{__DIR__}/../../data/01")
     |> String.trim()
     |> String.split("\n")
     |> Enum.map(&String.to_integer/1)

@@ -37,7 +37,7 @@ end
 defmodule Day3 do
   def run do
     input =
-      File.read!("#{__DIR__}/../data/03")
+      File.read!("#{__DIR__}/../../data/03")
       |> String.trim()
       |> String.split("\n")
       |> Enum.map(&Claim.from_string/1)

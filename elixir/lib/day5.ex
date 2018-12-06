@@ -28,7 +28,7 @@ defmodule Day5 do
   end
 
   def read_input do
-    File.read!("#{__DIR__}/../data/05")
+    File.read!("#{__DIR__}/../../data/05")
     |> String.trim()
     |> String.graphemes()
   end

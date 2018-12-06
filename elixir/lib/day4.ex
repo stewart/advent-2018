@@ -62,7 +62,7 @@ defmodule Day4 do
   end
 
   def read_input do
-    File.read!("#{__DIR__}/../data/04")
+    File.read!("#{__DIR__}/../../data/04")
     |> String.trim()
     |> String.split("\n")
   end

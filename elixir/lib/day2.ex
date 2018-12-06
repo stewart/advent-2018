@@ -1,7 +1,7 @@
 defmodule Day2 do
   def run do
     input =
-      File.read!("#{__DIR__}/../data/02")
+      File.read!("#{__DIR__}/../../data/02")
       |> String.trim()
       |> String.split("\n")
       |> Enum.map(&String.graphemes/1)
