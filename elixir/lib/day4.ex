@@ -30,7 +30,7 @@ defmodule Day4 do
 
     slept_most =
       sleep_schedule
-      |> Enum.max_by(fn {id, minutes} ->
+      |> Enum.max_by(fn {_, minutes} ->
         minutes |> Map.values() |> Enum.sum()
       end)
       |> elem(0)
@@ -38,7 +38,7 @@ defmodule Day4 do
     most_slept_minute =
       sleep_schedule
       |> Map.get(slept_most)
-      |> Enum.sort_by(fn {minute, count} -> count end)
+      |> Enum.sort_by(fn {_, count} -> count end)
       |> Enum.reverse()
       |> hd()
       |> elem(0)
@@ -79,7 +79,7 @@ defmodule Day4 do
 
     postings
     |> Enum.reduce({nil, 0, %{}}, fn
-      {_, {_, minute}, {:guard, id}}, {_, _, acc} ->
+      {_, {_, _}, {:guard, id}}, {_, _, acc} ->
         {id, 0, Map.update(acc, id, empty_hour, fn v -> v end)}
 
       {_, {_, minute}, :sleep}, {id, _, acc} ->

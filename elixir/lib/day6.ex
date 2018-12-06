@@ -1,4 +1,4 @@
-defmodule DayXX do
+defmodule Day6 do
   def run do
     input = read_input()
 
@@ -15,8 +15,7 @@ defmodule DayXX do
   end
 
   def read_input do
-    File.read!("#{__DIR__}/../../data/XX")
+    File.read!("#{__DIR__}/../../data/06")
     |> String.trim()
-    |> String.split("\n")
   end
 end
