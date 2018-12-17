@@ -1,6 +1,6 @@
 #![allow(dead_code, unused_imports, unused_variables)]
 
-use std::collections::{HashMap,HashSet};
+use std::collections::*;
 
 const DATA: &'static str = include_str!("../../../data/XX");
 
