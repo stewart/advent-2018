@@ -5,14 +5,14 @@ use std::collections::*;
 const DATA: &'static str = include_str!("../../../data/XX");
 
 fn main() {
-    println!("Part 01: {}", part1(DATA));
-    // println!("Part 02: {}", part2(DATA));
+    let input = read_input();
+
+    println!("{:?}", input);
+
+    // println!("Part 1: {:?}", process(&grid, carts.clone(), true));
+    // println!("Part 2: {:?}", process(&grid, carts.clone(), false));
 }
 
-fn part1(input: &str) -> usize {
-    0
-}
-
-fn part2(input: &str) -> usize {
-    0
+fn read_input() -> usize {
+    DATA.lines().count()
 }
